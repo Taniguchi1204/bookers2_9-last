@@ -16,19 +16,8 @@
         </td>
         <td><%= link_to book.title, book_path(book), class: "book_#{book.id}" %></td>
         <td><%= book.body %></td>
-        <% if book.favorites_by?(current_user) %>
-          <td class="dislike">
-            <%= link_to book_favorites_path(book), method: :delete do %>
-              <span><i class="fas fa-heart"></i><%= book.favorites.count %></span>
-            <% end %>
-          </td>
-        <% else %>
-          <td class="like">
-            <%= link_to book_favorites_path(book), method: :post do %>
-              <span><i class="fas fa-heart"></i><%= book.favorites.count %></span>
-            <% end %>
-          </td>
-        <% end %>
+        <div id = "favolites_btn_<%= book.id %>"
+        <%= render "favorites/like", book: book %>
         <td>コメント数：<%= book.book_comments.count %></td>
       </tr>
     <% end %>

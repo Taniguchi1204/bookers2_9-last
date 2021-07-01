@@ -12,7 +12,9 @@
     <%= render 'layouts/header' %>
       <main>
         <p id="notice"><%= notice %></p>
-        <%= render "layouts/search" %>
+        <% if user_signed_in? %>
+          <%= render "layouts/search" %>
+        <% end %>
         <%= yield %>
       </main>
     <%= render 'layouts/footer' %>
