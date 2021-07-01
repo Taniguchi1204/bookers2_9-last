@@ -1,0 +1,9 @@
+
+<div class="search">
+  <%= form_with(url: search_page_path, local: true, method: :get) do |f| %>
+    <%= f.text_field :keyword %>
+    <%= select_tag "search_area", options_for_select([["User", "users"],["Book","books"]]) %>
+    <%= select_tag "search_method" ,options_for_select([["完全一致", "all"],["部分一致","parts"]]) %>
+    <%= f.submit "検索" %>
+  <% end %>
+</div>
