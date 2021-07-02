@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed
   has_many :groups, dependent: :destroy
+  has_many :user_rooms, dependent: :destroy
+  has_many :chats, dependent: :destroy
 
 
   attachment :profile_image, destroy: false
@@ -30,6 +32,7 @@ class User < ApplicationRecord
       today / yesterday * 100
     elsif today == 0
       today += 1
+      yesterday += 1
       today / yesterday * 100
     else
       today / yesterday * 100
@@ -39,15 +42,17 @@ class User < ApplicationRecord
   def week_rate
     week = books.where(created_at: Date.today.all_week).count
     privous_week = books.where(created_at: 1.week.ago.all_day).count
-    if week == 0
-      week += 1
+    if privous_week == 0
+      privous_week += 1
       week / privous_week * 100
-    elsif privous_week == 0
+    elsif week == 0
+      week += 1
       privous_week += 1
       week / privous_week * 100
     else
       week / privous_week * 100
     end
+
   end
 
   def follow(user_id)

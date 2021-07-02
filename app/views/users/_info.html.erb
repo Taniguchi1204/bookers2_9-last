@@ -28,6 +28,16 @@
   <% end %>
 </div>
 
+<div class="row">
+  <% if user != current_user %>
+    <% if current_user.following?(user) %>
+      <%= link_to "chatを始める", chat_path(user) %>
+    <% end %>
+  <% end %>
+</div>
+
+
+
 <div class='row'>
   <%= link_to '',edit_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
 </div>

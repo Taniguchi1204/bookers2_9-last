@@ -1,6 +1,10 @@
 class BooksController < ApplicationController
   before_action :move_to_index, only:[:edit,:update,:destroy]
 
+  def book_count(num)
+
+  end
+
   def move_to_index
     @book = Book.find(params[:id])
     if @book.user != current_user
@@ -16,6 +20,13 @@ class BooksController < ApplicationController
   def index
     @book = Book.new
     @books = Book.includes(:favorites).sort {|a,b| b.favorited_user.size <=> a.favorited_user.size}
+    @a = Book.where(created_at: Date.today.all_day).count
+    @b = Book.where(created_at: Date.today.days_ago(1).all_day).count
+    @c = Book.where(created_at: Date.today.days_ago(2).all_day).count
+    @d = Book.where(created_at: Date.today.days_ago(3).all_day).count
+    @e = Book.where(created_at: Date.today.days_ago(4).all_day).count
+    @f = Book.where(created_at: Date.today.days_ago(5).all_day).count
+    @g = Book.where(created_at: Date.today.days_ago(6).all_day).count
   end
 
   def create
