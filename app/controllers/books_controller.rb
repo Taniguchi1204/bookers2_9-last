@@ -15,7 +15,7 @@ class BooksController < ApplicationController
 
   def index
     @book = Book.new
-    @books = Book.all
+    @books = Book.includes(:favorites).sort {|a,b| b.favorited_user.size <=> a.favorited_user.size}
   end
 
   def create

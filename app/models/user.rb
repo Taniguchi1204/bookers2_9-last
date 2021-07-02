@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorited_book, through: :favorites, source: :book
   has_many :book_comments, dependent: :destroy
 
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
@@ -18,8 +19,35 @@ class User < ApplicationRecord
 
   validates :name, length: {minimum: 2, maximum: 20}, uniqueness: true
   validates :introduction, length:{maximum: 50}
-  
- 
+
+  def day_rate
+    today = books.where(created_at: Date.today.all_day).count
+    yesterday = books.where(created_at: Date.yesterday.all_day).count
+    if yesterday == 0
+      yesterday += 1
+      today / yesterday * 100
+    elsif today == 0
+      today += 1
+      today / yesterday * 100
+    else
+      today / yesterday * 100
+    end
+  end
+
+  def week_rate
+    week = books.where(created_at: Date.today.all_week).count
+    privous_week = books.where(created_at: 1.week.ago.all_day).count
+    if week == 0
+      week += 1
+      week / privous_week * 100
+    elsif privous_week == 0
+      privous_week += 1
+      week / privous_week * 100
+    else
+      week / privous_week * 100
+    end
+  end
+
   def follow(user_id)
       relationships.create(followed_id: user_id)
   end

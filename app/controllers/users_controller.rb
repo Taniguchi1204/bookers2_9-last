@@ -13,6 +13,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @books = @user.books.all
+    @books_tody = @user.books.where(created_at: Date.today.all_day)
+    @books_before = @user.books.where(created_at: Date.yesterday.all_day)
+    @week = @user.books.where(created_at: Date.today.all_week).count
+    @privous_week = @user.books.where(created_at: 1.week.ago.all_day).count
     @book = Book.new
   end
 
