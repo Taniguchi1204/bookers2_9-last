@@ -87,13 +87,13 @@ class BooksController < ApplicationController
     @f = Book.where(created_at: Date.today.days_ago(5).all_day).count
     @g = Book.where(created_at: Date.today.days_ago(6).all_day).count
   end
-  
+
 
 
   private
 
   def book_params
-    params.require(:book).permit(:title,:body,:rate)
+    params.require(:book).permit(:title,:body,:category,:rate)
   end
 
 end

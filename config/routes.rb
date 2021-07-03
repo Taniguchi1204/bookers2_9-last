@@ -24,4 +24,6 @@ Rails.application.routes.draw do
   resources :chats, only:[:show,:create]
 
   get "search" => "searchs#search", as: "search_page"
+  get "category" => "searchs#category"
+  get "link_category" => "searchs#link_category"
 end
