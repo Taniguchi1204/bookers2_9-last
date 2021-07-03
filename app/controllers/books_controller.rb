@@ -15,6 +15,9 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @comment = BookComment.new
+    unless Viewcount.find_by(user_id: current_user,book_id: @book.id)
+      current_user.viewcounts.create(book_id: @book.id)
+    end
   end
 
   def index

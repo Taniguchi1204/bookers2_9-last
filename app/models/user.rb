@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :groups, through: :group_users, source: :group_id
   has_many :user_rooms, dependent: :destroy
   has_many :chats, dependent: :destroy
+  has_many :viewcounts, dependent: :destroy
 
 
   attachment :profile_image, destroy: false

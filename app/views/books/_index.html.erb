@@ -22,6 +22,7 @@
         </td>
         <td>コメント数：<%= book.book_comments.count %></td>
         <td id="star-rate-<%= book.id %>"></td>
+        <td><%= book.viewcounts.count %></td>
         <script>
           $('#star-rate-<%= book.id %>').raty({
             size: 36,
