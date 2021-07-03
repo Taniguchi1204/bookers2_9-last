@@ -36,7 +36,15 @@
           <td><%= @user.week_rate %>%</td>
         </tr>
       </table>
-
+    <%= form_with url: user_books_search_path(@user.id),method: :get,remote: true do |f| %>
+      <%= f.date_field :day %>
+      <%= f.submit "検索"%>
+    <% end %>
+    <div id="search">
+      <% if @search_books.present? %>
+        <%= render "search_book", search_books: @search_books %>
+      <% end %>
+    </div>
     </div>
   </div>
 </div>
