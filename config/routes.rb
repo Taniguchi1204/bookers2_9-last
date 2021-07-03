@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get "rate" => "books#rate", as: "rate"
 
   resources :groups, only:[:show,:index,:new,:create,:edit,:update] do
+    get "event" => "groups#event"
+    get "email_create" => "groups#email_create"
     resource :group_users, only:[:create,:destroy]
   end
   resources :chats, only:[:show,:create]

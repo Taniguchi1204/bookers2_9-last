@@ -37,6 +37,18 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
+  def event
+    @group = Group.find(params[:group_id])
+  end
+
+  def email_create
+    @group = Group.find(params[:group_id])
+    group_users = @group.users
+    @title = params[:title]
+    @content = params[:content]
+    UserMailer.create_event(group_users, @title, @content).deliver
+  end
+
   private
 
   def group_params
