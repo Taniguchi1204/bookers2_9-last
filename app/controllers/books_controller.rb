@@ -61,6 +61,31 @@ class BooksController < ApplicationController
     redirect_to books_path
   end
 
+  def search
+    @book = Book.new
+    @books = Book.all.order(created_at: :desc)
+    @a = Book.where(created_at: Date.today.all_day).count
+    @b = Book.where(created_at: Date.today.days_ago(1).all_day).count
+    @c = Book.where(created_at: Date.today.days_ago(2).all_day).count
+    @d = Book.where(created_at: Date.today.days_ago(3).all_day).count
+    @e = Book.where(created_at: Date.today.days_ago(4).all_day).count
+    @f = Book.where(created_at: Date.today.days_ago(5).all_day).count
+    @g = Book.where(created_at: Date.today.days_ago(6).all_day).count
+  end
+
+  def rate
+    @book = Book.new
+    @books = Book.all.order(rate: :desc)
+    @a = Book.where(created_at: Date.today.all_day).count
+    @b = Book.where(created_at: Date.today.days_ago(1).all_day).count
+    @c = Book.where(created_at: Date.today.days_ago(2).all_day).count
+    @d = Book.where(created_at: Date.today.days_ago(3).all_day).count
+    @e = Book.where(created_at: Date.today.days_ago(4).all_day).count
+    @f = Book.where(created_at: Date.today.days_ago(5).all_day).count
+    @g = Book.where(created_at: Date.today.days_ago(6).all_day).count
+  end
+
+
   private
 
   def book_params
